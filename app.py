@@ -3,7 +3,11 @@ import openai
 import os
 
 app = Flask(__name__)
-openai.api_key = os.environ["OPENAI_API_KEY"]  # 환경변수에서 API 키 불러오기
+openai.api_key = os.environ["OPENAI_API_KEY"]  # 환경변수에서 API 키 가져오기
+
+@app.route("/", methods=["GET"])
+def index():
+    return "GPT Chatbot is running!"
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -29,3 +33,8 @@ def chat():
             }]
         }
     })
+
+# ✅ 이 부분이 반드시 필요합니다 (Render에서 동작하려면)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
