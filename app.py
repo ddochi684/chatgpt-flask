@@ -11,6 +11,9 @@ def index():
 
 @app.route("/chat", methods=["POST"])
 def chat():
+    # ✅ 요청 확인용 로그 출력
+    print("✅ /chat 요청 들어옴:", request.json)
+
     user_input = request.json['userRequest']['utterance']
 
     response = openai.ChatCompletion.create(
@@ -34,7 +37,7 @@ def chat():
         }
     })
 
-# ✅ 이 부분이 반드시 필요합니다 (Render에서 동작하려면)
+# ✅ Render에서 동작하도록 포트 설정
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
