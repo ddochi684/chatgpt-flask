@@ -4,7 +4,7 @@ import os
 import threading
 from uuid import uuid4
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 # 🔐 OpenAI API 키 환경변수에서 불러오기
 openai.api_key = os.environ["OPENAI_API_KEY"]
